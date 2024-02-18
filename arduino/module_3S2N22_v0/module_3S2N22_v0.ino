@@ -144,15 +144,14 @@ void loop() {
     digitalWrite(LED_DATA, LOW);
   }
   }
+  if (millis() % 10 == 0) {
   bool catched_data = false;
   if (serial_switch) {
-    serial_1.listen();
     if (serial_1.readBytes((byte*)&buf, sizeof(buf))) {
       catched_data = true;
       analogWrite(LED_DATA, 120);
       }
   } else {
-    serial_2.listen();
     if (serial_2.readBytes((byte*)&buf, sizeof(buf))) {
       catched_data = true;
       analogWrite(LED_DATA, 120);
@@ -257,7 +256,6 @@ void loop() {
           serial_2.write((byte*)&resp, sizeof(resp));
         }
         digitalWrite(LED_DATA, HIGH);
-        delay(1);
       }
     } else {
       if (!serial_switch) {
@@ -270,5 +268,5 @@ void loop() {
     }
   }
   serial_switch = !serial_switch;
-  delay(1);
+  }
 }
