@@ -580,7 +580,7 @@ class MyWidget(QMainWindow, MainWindow):
         if self.con_com.text() == "подключиться":
             if self.com.currentText():
                 print(self.content[self.com.currentText()])
-                self.serial = QtSerialPort.QSerialPort("COM3", baudRate=QtSerialPort.QSerialPort.Baud9600, readyRead=self.receive)
+                self.serial = QtSerialPort.QSerialPort(self.content[self.com.currentText()], baudRate=QtSerialPort.QSerialPort.Baud9600, readyRead=self.receive)
                 if not self.serial.isOpen():
                     if not self.serial.open(QIODevice.ReadWrite):
                         self.con_com.setText("подключиться")
